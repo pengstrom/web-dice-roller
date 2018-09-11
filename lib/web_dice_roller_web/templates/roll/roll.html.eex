@@ -1,0 +1,22 @@
+<h3>You rolled: <%= @roll_sum %></h3>
+<ol>
+<%= for {status, data} <- @rolls do %>
+  <li>
+    <%= if status == :ok do %>
+      <%= case data do %>
+        <%= {res, {:dice, s, n, m}, spec} -> %>
+          Sum <strong><%= Enum.sum res %></strong>. A <%= s %>-sided die, rolled <%= n %> times and summed and then multiplied by <%= m %> from spec <code><%= spec %></code>.
+          <ol>
+            <%= for x <- res do %>
+              <li><%= x %></li>
+            <% end %>
+          </ol>
+        <%= {_res, {:const, c}, spec} -> %>
+          A constant <%= c %> from spec <code><%= spec %></code>.
+      <% end %>
+    <% else %>
+      Error on spec <code><%= data %></code>.
+    <% end %>
+  </li>
+<% end %>
+</ol>

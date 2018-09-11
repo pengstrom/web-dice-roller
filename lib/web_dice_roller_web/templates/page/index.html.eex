@@ -1,0 +1,7 @@
+<%= form_for @conn, "/roll", fn f -> %>
+  <div class="form-group">
+    <label for="spec">Dice specification</label>
+    <%= text_input f, :spec, [class: "form-control", placeholder: "d6 + 2d4x3 + 11"] %>
+  </div>
+  <%= submit "Roll!", [class: "btn btn-primary"] %>
+<% end %>
